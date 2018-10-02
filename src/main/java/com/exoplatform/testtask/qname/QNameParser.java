@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 public class QNameParser {
 	private static final String PREFIX_TEMPLATE = "(?!xml|Xml|xMl|XMl|xmL|XmL|xML|XML)[a-zA-Z_][a-zA-Z0-9-_.]+:";
-	private static final String ONE_TWO_CHAR_LOCAL_NAME_TEMPLATE = "[.[^./:\\]\\[*'\"|\\s]]{1,2}";
-	private static final String THREE_OR_MORE_NAME_TEMPLATE = "[.[^./:\\]\\[*'\"|\\s]][.[^./:\\]\\[*'\"|]]{1,}[.[^./:\\]\\[*'\"|\\s]]";
-	private static final String ONE_CHAR_SIMPLE_NAME_TEMPLATE = "[.[^./:\\]\\[*'\"|\\s]]";
-	private static final String TWO_CHAR_SIMPLE_NAME_TEMPLATE = "(?:[.][.[^./:\\]\\[*'\"|\\s]])|(?:[.[^./:\\]\\[*'\"|\\s]][.])|(?:[.[^./:\\]\\[*'\"|\\s]]{2,2})";
+	private static final String ONE_TWO_CHAR_LOCAL_NAME_TEMPLATE = "[^./:\\]\\[*'\"|\\s]{1,2}";
+	private static final String THREE_OR_MORE_NAME_TEMPLATE = "[^/:\\]\\[*'\"|\\s][^/:\\]\\[*'\"|]{1,}[^/:\\]\\[*'\"|\\s]";
+	private static final String ONE_CHAR_SIMPLE_NAME_TEMPLATE = "[^./:\\]\\[*'\"|\\s]";
+	private static final String TWO_CHAR_SIMPLE_NAME_TEMPLATE = "(?:[.][^./:\\]\\[*'\"|\\s])|(?:[^./:\\]\\[*'\"|\\s][.])|(?:[^./:\\]\\[*'\"|\\s]{2,2})";
 
 	private static final Pattern NAME_PATTERN = Pattern.compile("^(?:(?:(" + PREFIX_TEMPLATE + ")" +
 			"((?:" + ONE_TWO_CHAR_LOCAL_NAME_TEMPLATE + ")" +
@@ -27,8 +27,9 @@ public class QNameParser {
 
 		if (matcher.find()) {
 			try {
-				if (matcher.group(1) != null) {
-					qName.setPrefix(matcher.group(1));
+				String prefix = matcher.group(1);
+				if (prefix != null) {
+					qName.setPrefix(prefix.substring(0, prefix.length() - 1));
 					qName.setLocalName(matcher.group(2));
 				} else {
 					qName.setLocalName(matcher.group(3));
