@@ -1,9 +1,20 @@
 package com.exoplatform.testtask.qname;
 
+/**
+ * Qualified name entity
+ *
+ * @author  Denys Tymchuk
+ */
 public class QName {
 
+	/**
+	 * The prefix of name
+	 */
 	private String prefix;
 
+	/**
+	 * The local name
+	 */
 	private String localName;
 
 	public QName(String prefix, String localName) {
@@ -14,6 +25,9 @@ public class QName {
 	public QName() {
 	}
 
+	/**
+	 * @return {@link QName#prefix}
+	 */
 	public String getPrefix() {
 		return prefix;
 	}
@@ -22,6 +36,9 @@ public class QName {
 		this.prefix = prefix;
 	}
 
+	/**
+	 * @return {@link QName#localName}
+	 */
 	public String getLocalName() {
 		return localName;
 	}
@@ -30,6 +47,10 @@ public class QName {
 		this.localName = localName;
 	}
 
+	/**
+	 * @return {@link QName#localName} and {@link QName#prefix} if the prefix is not null and not empty,
+	 * otherwise only {@link QName#localName}
+     */
 	public String getAsString() {
 		return (prefix != null && !prefix.trim().isEmpty()) ? prefix + ":" + localName : localName;
 	}
