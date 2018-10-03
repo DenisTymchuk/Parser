@@ -23,7 +23,7 @@ public class QNameParser {
 	 *     <li>Element names must start with a letter or underscore.
 	 * </ul>
 	 */
-	private static final String PREFIX_TEMPLATE = "(?!xml|Xml|xMl|XMl|xmL|XmL|xML|XML)[a-zA-Z_][a-zA-Z0-9-_.]+:";
+	private static final String PREFIX_TEMPLATE = "(?!xml|Xml|xMl|XMl|xmL|XmL|xML|XML)[\\p{L}_][\\p{L}0-9-_.]*:";
 
 	/**
 	 * Template for matching one or two char.
@@ -76,10 +76,9 @@ public class QNameParser {
 	 */
 	public static QName parse(String name) throws IllegalNameException {
 		Matcher matcher = NAME_PATTERN.matcher(name);
-		QName qName = new QName();
 
 		if (matcher.find()) {
-			try {
+			QName qName = new QName();
 				String prefix = matcher.group(1);
 				if (prefix != null) {
 					qName.setPrefix(prefix.substring(0, prefix.length() - 1));
@@ -87,9 +86,6 @@ public class QNameParser {
 				} else {
 					qName.setLocalName(matcher.group(3));
 				}
-			} catch (NullPointerException exception) {
-				throw new IllegalNameException();
-			}
 
 			return qName;
 		} else {

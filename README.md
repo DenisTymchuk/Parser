@@ -1,5 +1,7 @@
 # QNameParser
-###Short description
+
+### Short description <br>
+
 Entity class QName describe qualified name.
 Class _QNameParser_ produces an object of qualified name, using regular expressions.
 <br>The format of a qualified name is specified by the next rules:
@@ -8,15 +10,16 @@ name                ::= simplename | prefixedname<br>
 simplename          ::= onecharsimplename | twocharsimplename | threeormorecharname<br>
 prefixedname        ::= prefix ':' localname<br>
 localname           ::= onecharlocalname | twocharlocalname | threeormorecharname<br>
-onecharsimplename   ::= (* Any Unicode character except: '.', '/', ':', '[', ']', '*', ''', '"', '|' or any whitespace character)                                                                                                     
-twocharsimplename   ::= '.' onecharsimplename | onecharsimplename '.' | onecharsimplename onecharsimplename
+onecharsimplename   ::= Any Unicode character except: '.', '/', ':', '[', ']', '\*', ''', '"', '|' or any whitespace character                                                              
+twocharsimplename   ::= '.' onecharsimplename | onecharsimplename '.' | onecharsimplename onecharsimplename<br>
 onecharlocalname    ::= nonspace<br>
 twocharlocalname    ::= nonspace nonspace<br>
 threeormorecharname ::= nonspace string nonspace<br>
-prefix              ::= (* Any valid non-empty XML NCName *)<br>
+prefix              ::= Any valid non-empty XML name<br>
 string              ::= char | string char<br>
 char                ::= nonspace | ' '<br>
-nonspace            ::= (* Any Unicode character except: '/', ':', '[', ']', '*', ''', '"', '|' or any whitespace character<br>
+nonspace            ::= (Any Unicode character except: '/', ':', '[', ']', '\*', ''', '"', '|' or any whitespace character<br>
+
 
 ### Run tests
 1) First of all, clone the repository with `git clone`.

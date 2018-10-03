@@ -52,6 +52,6 @@ public class QName {
 	 * otherwise only {@link QName#localName}
      */
 	public String getAsString() {
-		return (prefix != null && !prefix.trim().isEmpty()) ? prefix + ":" + localName : localName;
+		return (prefix != null && !prefix.isEmpty()) ? prefix + ":" + localName : localName;
 	}
 }
