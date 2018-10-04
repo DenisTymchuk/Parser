@@ -22,10 +22,10 @@ public class QNameTest {
 	}
 
 	@Test
-	public void getAsString_givenInvalidPrefix_returnLocalNameString() {
+	public void getAsString_givenEmpyPrefix_returnLocalNameString() {
 		QName qName = new QName();
 		qName.setLocalName("name");
-		qName.setPrefix("         ");
+		qName.setPrefix("");
 
 		assertEquals("name", qName.getAsString() );
 	}
